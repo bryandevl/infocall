@@ -2185,7 +2185,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TestController = void 0;
 const essalud_export_service_1 = __webpack_require__(30);
@@ -2194,8 +2194,9 @@ const sbs_service_1 = __webpack_require__(19);
 const sbsDetalle_export_service_1 = __webpack_require__(32);
 const common_1 = __webpack_require__(2);
 const swagger_1 = __webpack_require__(4);
-const sbs_dto_1 = __webpack_require__(38);
-const sbsDetalle_dto_1 = __webpack_require__(39);
+const essalud_dto_1 = __webpack_require__(38);
+const sbs_dto_1 = __webpack_require__(39);
+const sbsDetalle_dto_1 = __webpack_require__(40);
 let TestController = exports.TestController = class TestController {
     constructor(EssaludExportsService, CorreoExportsService, SbsExportsService, SbsDetalleExportsService) {
         this.EssaludExportsService = EssaludExportsService;
@@ -2210,6 +2211,10 @@ let TestController = exports.TestController = class TestController {
     async getSBSDETALLE(data) {
         const movistar = await this.SbsDetalleExportsService.findBySbsDetalle(data.documento);
         return movistar;
+    }
+    async getESSALUD(data) {
+        const essalud = await this.EssaludExportsService.findByEssalud(data.documento);
+        return essalud;
     }
 };
 __decorate([
@@ -2228,6 +2233,14 @@ __decorate([
     __metadata("design:paramtypes", [typeof (_f = typeof sbsDetalle_dto_1.SbsDetalleDTO !== "undefined" && sbsDetalle_dto_1.SbsDetalleDTO) === "function" ? _f : Object]),
     __metadata("design:returntype", Promise)
 ], TestController.prototype, "getSBSDETALLE", null);
+__decorate([
+    (0, common_1.Post)('getESSALUD'),
+    (0, swagger_1.ApiOperation)({ summary: 'getESSALUD' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_g = typeof essalud_dto_1.EssaludDTO !== "undefined" && essalud_dto_1.EssaludDTO) === "function" ? _g : Object]),
+    __metadata("design:returntype", Promise)
+], TestController.prototype, "getESSALUD", null);
 exports.TestController = TestController = __decorate([
     (0, common_1.Controller)('test'),
     (0, swagger_1.ApiTags)('test'),
@@ -2237,6 +2250,34 @@ exports.TestController = TestController = __decorate([
 
 /***/ }),
 /* 38 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.EssaludDTO = void 0;
+const class_validator_1 = __webpack_require__(9);
+class EssaludDTO {
+}
+exports.EssaludDTO = EssaludDTO;
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)({}, { each: true }),
+    __metadata("design:type", Array)
+], EssaludDTO.prototype, "documento", void 0);
+
+
+/***/ }),
+/* 39 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -2264,7 +2305,7 @@ __decorate([
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -2292,7 +2333,7 @@ __decorate([
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ ((module) => {
 
 module.exports = require("body-parser");
@@ -2334,7 +2375,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __webpack_require__(1);
 const common_1 = __webpack_require__(2);
 const documentacion_1 = __webpack_require__(3);
-const bodyParser = __webpack_require__(40);
+const bodyParser = __webpack_require__(41);
 const app_module_1 = __webpack_require__(5);
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);

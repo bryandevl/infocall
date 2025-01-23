@@ -55,5 +55,16 @@ export class TestController {
     }
 
 
-    
+
+
+    @Post('getESSALUD')
+    @ApiOperation({ summary: 'getESSALUD' })
+    async getESSALUD(@Body() data: EssaludDTO) {
+        // Usar el servicio inyectado correctamente
+        const essalud = await this.EssaludExportsService.findByEssalud(
+            data.documento,
+        );
+
+        return essalud;
+    }
 }
